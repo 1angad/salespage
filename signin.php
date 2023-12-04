@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Salespage</title>
     <link rel="stylesheet" href="style.css">
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
     <div class="container">
@@ -13,11 +12,11 @@
             <h1>Sign In</h1>
             <div class="input-box">
                 <input type="email" name="email" placeholder="Email Address">
-                <i class='bx bxs-envelope'></i>
+                <img src="bxs-envelope.svg">
             </div>
             <div class="input-box">
                 <input type="password" name="password" placeholder="Password">
-                <i class='bx bxs-lock-alt' ></i>
+                <img src="bxs-lock-alt.svg">
             </div>
             
             <input type="submit" name = "login" value="Log In">

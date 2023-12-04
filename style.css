@@ -1,10 +1,14 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;500;700&display=swap');
+@font-face{
+    font-family: Inter;
+    src: url(Inter-VariableFont_slnt\,wght.ttf);
 
+}
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Inter', sans-serif;}
+    font-family: Inter;
+}
 
 body {
     display: flex;
@@ -58,7 +62,8 @@ body {
 
 }
 
-.input-box i {
+.input-box img {
+    filter: invert(92%) sepia(99%) saturate(2%) hue-rotate(249deg) brightness(105%) contrast(102%);
     position: absolute;
     right: 20px;
     top: 50%;
