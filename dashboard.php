@@ -1,10 +1,13 @@
 <?php
 session_start();
-$_SESSION = array();
-session_destroy();
-// Redirect to login page
-header("Location: signin.php");
-exit();
+
+// Check if the user is logged in, otherwise redirect to login page
+if (!isset($_SESSION["user"])) {
+    header("Location: signin.php");
+    exit();
+}
+
+// Add logic to fetch and display data as needed
 ?>
 
 <!DOCTYPE html>
@@ -19,6 +22,13 @@ exit();
 <body>
     <div class="container">
         <h1>Admin Dashboard</h1>
+
+        <!-- User action options -->
+        <div class="dashboard-actions">
+            <a href="seller_dashboard.php" class="seller_dashboard.php">Upload a Property</a>
+            <a href="buyer_dashboard.php" class="buyer_dashboard.php">View Properties</a>
+        </div>
+
         <div class="dashboard-section">
             <h3>Cities with Highest Property Listings</h3>
             <!-- Display data here -->
@@ -33,8 +43,9 @@ exit();
             <h3>User Sales Information</h3>
             <!-- Display data here -->
         </div>
+
         <div class="opposite-link">
-            <p><a href="#">Logout</a></p>
+            <a href="logout.php">Logout</a> <!-- Link to a logout script -->
         </div>
     </div>
 
