@@ -2,7 +2,7 @@
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
 
-$hostName = "localhost:3333"; // Specify the port if MySQL is running on a non-default port
+$hostName = "localhost"; // Specify the port if MySQL is running on a non-default port
 $dbUser = "root";
 $dbPassword = "";
 $dbName = "propertydb";
