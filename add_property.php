@@ -24,10 +24,11 @@ if (isset($_POST['submit'])) {
     $image = $_FILES['propertyImage'];
     $imageName = $image['name'];
     $imageTmpName = $image['tmp_name'];
-    $imageDestination = 'C:\xampp\htdocs\project4\salespage' . $imageName;
+    $imageDestination = 'C:\xampp\htdocs\salespage' . $imageName;
     move_uploaded_file($imageTmpName, $imageDestination);
 
     // Insert into database
+    $userID = $_SESSION["user"];
     $sql = "INSERT INTO SellerInfo (UserID, Location, Age, FloorPlan, Bedrooms, Bathrooms, Garden, Parking, Proximity, PropertyTax, ImagePath) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     $stmt = mysqli_stmt_init($link);
     if (!mysqli_stmt_prepare($stmt, $sql)) {
@@ -35,7 +36,7 @@ if (isset($_POST['submit'])) {
     } else {
         mysqli_stmt_bind_param($stmt, "isisiiiiids", $userID, $location, $age, $floorPlan, $bedrooms, $bathrooms, $garden, $parking, $proximity, $propertyTax, $imageDestination);
         mysqli_stmt_execute($stmt);
-        header("Location: seller_dashboard.php");
+        echo "SUCCESS";
         exit();
     }
 }
@@ -54,7 +55,7 @@ if (isset($_POST['submit'])) {
     <div class="container">
         <h1> Create Property Listing </h1> <br>
         <!-- Form for adding new property -->
-        <form action="seller_dashboard.php" method="post" enctype="multipart/form-data">
+        <form action="add_property.php" method="post" enctype="multipart/form-data">
             <input type="text" name="location" placeholder="Location">
             <input type="number" name="age" placeholder="Age">
             <input type="text" name="floorPlan" placeholder="Floor Plan">

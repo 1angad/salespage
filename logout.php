@@ -1,11 +1,8 @@
 <?php
-// Start the session
-session_start();
+    session_start();
 
-// Destroy the session
-session_destroy();
+    session_destroy();
 
-// Redirect to the login page 
-header("Location: signin.php");
-exit();
+    header("Location: signin.php");
+    exit();
 ?>

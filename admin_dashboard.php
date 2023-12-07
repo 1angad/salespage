@@ -21,7 +21,16 @@ if (!isset($_SESSION["user"])) {
 </head>
 <body>
     <div class="container">
-        <h1>Admin Dashboard</h1>
+    <?php
+        require_once "connectDB.php";
+        $stmt = $link->prepare("SELECT FirstName FROM users WHERE UserID = ?");
+        $stmt->bind_param("i", $_SESSION["user"]);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $user = $result->fetch_assoc();
+    ?>
+
+        <h1>Welcome, <?php echo htmlspecialchars($user['FirstName']); ?></h1>
 
         <!-- User action options -->
         <div class="dashboard-actions">
