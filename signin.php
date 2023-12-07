@@ -44,7 +44,7 @@
 
                 if ($user && password_verify($password, $user["Password"])) {
                     session_start();
-                    $_SESSION["user"] = $user["UserID"]; // or any other user identifier
+                    $_SESSION["user"] = $user["UserID"]; 
                     header("Location: dashboard.php");
                     exit();
                 } else {

@@ -26,9 +26,8 @@ body {
 }
 
 .seller-container {
-    position: relative;
     display: flex;
-    
+    width: 100%;
 }
 
 nav {
@@ -36,26 +35,26 @@ nav {
     top: 0;
     left: 0;
     height: 100%;
-    width: 70px; /* Adjust the width as needed */
+    width: 70px; /* Original width */
     display: flex;
-    flex-direction: column; /* Align items vertically */
+    flex-direction: column;
     align-items: center;
     background: #fff;
     box-shadow: 0 0 1px rgba(0, 0, 0, 0.1);
-    z-index: 1000; /* Ensure the nav is above other elements */
+    z-index: 1000;
 }
 
 nav .logo {
     display: flex;
-    flex-direction: column; /* Align items vertically */
+    flex-direction: column;
     align-items: center;
     margin: 24px 0;
 }
 
 .logo .menu-icon {
-    color: #000; /* Change the color to make it visible */
+    color: #000;
     font-size: 40px;
-    margin-bottom: 0px; /* Add some spacing between icon and text */
+    margin-bottom: 0px;
     cursor: pointer;
 }
 
@@ -74,11 +73,10 @@ nav .sidebar {
     width: 260px;
     padding: 20px 0;
     background-color: #fff;
-    border-radius: 10px; /* Add rounded corners */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a drop shadow */
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     transition: all 0.4s ease;
 }
-
 
 nav.open .sidebar {
     left: 0;
@@ -95,7 +93,7 @@ nav.open .sidebar {
 
 .sidebar-content .list {
     list-style: none;
-    width: 100%; /* Make the list items fill the container */
+    width: 100%;
 }
 
 .sidebar-content .lists{
@@ -105,6 +103,7 @@ nav.open .sidebar {
     margin: 150px;
     padding-left: 170px;
 }
+
 .list .nav-link {
     display: flex;
     align-items: center;
@@ -113,7 +112,6 @@ nav.open .sidebar {
     border-radius: 8px;
     text-decoration: none;
     width: 100%;
-    
 }
 
 .lists .nav-link:hover {
@@ -137,20 +135,54 @@ nav.open .sidebar {
     color: #fff;
 }
 
-.overlay {
-    top: 0;
-    left: -100%;
-    height: 100vh; /* Change this to 100vh */
-    width: 100vw; /* Change this to 100vw */
-    opacity: 0;
-    pointer-events: none;
-    transition: all 0.4s ease;
-    background: rgba(0, 0, 0, 0.3);
-    text-align: center;
+/* ... other styles ... */
+
+.property-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    justify-content: center;
+    align-items: stretch;
+    padding: 20px;
 }
 
-nav.open ~ .overlay {
-    opacity: 1;
-    left: 260px;
-    pointer-events: auto;
+.property-card {
+    border: 1px solid #ccc;
+    padding: 15px;
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.property-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.add-property-button {
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.add-property-button a {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .property-cards {
+        grid-template-columns: 1fr;
+    }
 }

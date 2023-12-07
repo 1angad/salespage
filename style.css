@@ -16,7 +16,7 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: url('city.jpg') no-repeat;
+    background: url('atlanta.jpg') no-repeat;
     background-size: cover;
     background-position: center;
 }

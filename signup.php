@@ -53,59 +53,67 @@
     </form>
 </div>
 
-    <?php
-    if(isset($_POST["submit"])) {
-        $firstName = $_POST["first-name"];
-        $lastName = $_POST["last-name"];
-        $username = $_POST["user"];
-        $email = $_POST["email"];
-        $password = $_POST["password"];
-        $confirmPass = $_POST["confirm-pass"];
-        $accountType = $_POST["account-type"];
-        $passwordHash = password_hash($password, PASSWORD_DEFAULT);
+<?php
+if(isset($_POST["submit"])) {
+    require_once "connectDB.php";
 
-        $errors = array();
+    $firstName = $_POST["first-name"];
+    $lastName = $_POST["last-name"];
+    $username = $_POST["user"];
+    $email = $_POST["email"];
+    $password = $_POST["password"];
+    $confirmPass = $_POST["confirm-pass"];
+    $accountType = $_POST["account-type"];
+    $passwordHash = password_hash($password, PASSWORD_DEFAULT);
 
-        if(empty($username) || empty($email) || empty($password) || empty($confirmPass) || empty($firstName) || empty($lastName)) {
-            array_push($errors, "All fields are required");
+    $errors = array();
+
+    // Validate inputs
+    if(empty($username) || empty($email) || empty($password) || empty($confirmPass) || empty($firstName) || empty($lastName)) {
+        array_push($errors, "All fields are required");
+    }
+    if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        array_push($errors, "Email is not valid");
+    }
+    if($password !== $confirmPass) {
+        array_push($errors, "Passwords must match");
+    }
+
+    // Check if email already exists
+    $sql = "SELECT EmailID FROM users WHERE EmailID = ?";
+    $stmt = mysqli_stmt_init($link);
+    if (!mysqli_stmt_prepare($stmt, $sql)) {
+        die("SQL statement preparation failed: " . mysqli_error($link));
+    } else {
+        mysqli_stmt_bind_param($stmt, "s", $email);
+        mysqli_stmt_execute($stmt);
+        mysqli_stmt_store_result($stmt);
+
+        if (mysqli_stmt_num_rows($stmt) > 0) {
+            array_push($errors, "Email already registered");
         }
-        if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            array_push($errors, "Email is not valid");
-        }
-        if($password !== $confirmPass) {
-            array_push($errors, "Passwords must match");
-        }
-        require_once "connectDB.php";
+        mysqli_stmt_close($stmt);
+    }
+    if (count($errors) == 0) {
         $sql = "INSERT INTO users (FirstName, LastName, EmailID, Username, Password, AccountType) VALUES (?, ?, ?, ?, ?, ?)";
         $stmt = mysqli_stmt_init($link);
-        
         if (!mysqli_stmt_prepare($stmt, $sql)) {
             die("SQL statement preparation failed: " . mysqli_error($link));
         } else {
-            // Bind parameters to the prepared statement
             mysqli_stmt_bind_param($stmt, "ssssss", $firstName, $lastName, $email, $username, $passwordHash, $accountType);
-        
-            // Execute the prepared statement
             mysqli_stmt_execute($stmt);
-        
-            // Redirect to the sign-in page upon successful registration
+            mysqli_stmt_close($stmt);
+
             header("Location: signin.php");
-        }
-        if (count($errors) > 0) {
-            foreach ($errors as $error) {
-                echo "<div class='error'>$error</div>";
-            }
-        } else {
-            $sql = "INSERT INTO users (FirstName, LastName, EmailID, Username, Password, AccountType) VALUES (?, ?, ?, ?, ?, ?)";
-            if (!mysqli_stmt_prepare($stmt, $sql)) {
-                die("SQL statement failed");
-            } else {
-                mysqli_stmt_bind_param($stmt, "ssssss", $firstName, $lastName, $email, $username, $passwordHash, $accountType);
-                mysqli_stmt_execute($stmt);
-                header("Location: signin.php");
-            }
+            exit();
         }
     }
+
+    foreach ($errors as $error) {
+        echo "<div class='error'>$error</div>";
+    }
+}
 ?>
+
 </body>
 </html>
