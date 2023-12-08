@@ -56,7 +56,7 @@ if (isset($_POST['submit'])) {
             <input type="number" name="price" placeholder="Price">
             <input type="text" name="location" placeholder="Location">
             <input type="number" name="age" placeholder="Age">
-            <input type="text" name="floorPlan" placeholder="Floor Plan">
+            <input type="text" name="floorPlan" placeholder="Square Footage">
             <input type="number" name="bedrooms" placeholder="Bedrooms">
             <input type="number" name="bathrooms" placeholder="Bathrooms">
             <input type="checkbox" name="garden"> <label for="garden">Garden</label>

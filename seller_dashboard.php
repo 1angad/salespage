@@ -17,7 +17,6 @@ if (!isset($_SESSION["user"])) {
     <link rel="stylesheet" href="seller_dashboard_style.css">
 </head>
 <body>
-    <div class="seller-container">
         <nav>
             <div class="sidebar">
                 <div class="logo">
@@ -58,11 +57,9 @@ if (!isset($_SESSION["user"])) {
         </nav>
         <section class="overlay">
         </section>
-    </div>
     <div class="main-content">
         <div class="property-cards">
             <?php
-
                 $stmt = $link->prepare("SELECT PropertyID, Location, ImagePath FROM SellerInfo WHERE UserID = ?");
                 $stmt->bind_param("i", $_SESSION["user"]);
                 $stmt->execute();
@@ -80,9 +77,9 @@ if (!isset($_SESSION["user"])) {
                     }
                 } 
             ?>
-            <div class='add-property-button'>
-                <a href='add_property.php'>Add New Property</a>
-            </div>
+        </div>
+        <div class='add-property-button'>
+            <a href='add_property.php'>Add New Property</a>
         </div>
     </div>
 </body>

@@ -17,7 +17,11 @@ body {
     align-items: center;
     padding: 20px;
     background-color: rgba(0, 0, 0, 0.7);
-    width: 90%;
+    width: 100%;
+}
+
+.header img{
+    margin-left: 20px;
 }
 
 .logo {
