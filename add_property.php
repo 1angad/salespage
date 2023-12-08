@@ -11,7 +11,7 @@ if (isset($_POST['submit'])) {
     // Retrieve form data
     $price = $_POST['price'];
     $location = $_POST['location'];
-    $age = $_POST['age'];
+    $age = $_POST['yearbuilt'];
     $floorPlan = $_POST['floorPlan'];
     $bedrooms = $_POST['bedrooms'];
     $bathrooms = $_POST['bathrooms'];
@@ -28,7 +28,7 @@ if (isset($_POST['submit'])) {
     move_uploaded_file($imageTmpName, $imageDestination);
 
     $userID = $_SESSION["user"];
-    $sql = "INSERT INTO SellerInfo (UserID, Price, Location, Age, FloorPlan, Bedrooms, Bathrooms, Garden, Parking, Proximity, PropertyTax, ImagePath) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO SellerInfo (UserID, Price, Location, YearBuilt, FloorPlan, Bedrooms, Bathrooms, Garden, Parking, Proximity, PropertyTax, ImagePath) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     $stmt = mysqli_stmt_init($link);
     if (!mysqli_stmt_prepare($stmt, $sql)) {
         echo "SQL statement failed";
@@ -55,7 +55,7 @@ if (isset($_POST['submit'])) {
         <form action="add_property.php" method="post" enctype="multipart/form-data">
             <input type="number" name="price" placeholder="Price">
             <input type="text" name="location" placeholder="Location">
-            <input type="number" name="age" placeholder="Age">
+            <input type="number" name="yearbuilt" placeholder="Year Built">
             <input type="text" name="floorPlan" placeholder="Square Footage">
             <input type="number" name="bedrooms" placeholder="Bedrooms">
             <input type="number" name="bathrooms" placeholder="Bathrooms">

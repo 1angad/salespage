@@ -19,8 +19,21 @@ $username = $_SESSION["user"];
 </head>
 <body>
     <div class="container">
-        <h1>Welcome, <?php echo htmlspecialchars($username); ?>!</h1>
-        <p>Welcome to the CHS Properties admin dashboard. Here, you can manage your property listings, view properties, and more.</p>
+
+    <?php
+        require_once "connectDB.php";
+        $stmt = $link->prepare("SELECT FirstName FROM users WHERE UserID = ?");
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $user = $result->fetch_assoc();
+        $firstName = $user['FirstName'];
+    ?>
+
+    <h1>Welcome, <?php echo htmlspecialchars($firstName); ?>!</h1>
+
+
+<p>Welcome to the CHS Properties admin dashboard. Here, you can manage your property listings, view properties, and more.</p>
         
         <div class="dashboard-actions">
             <a href="seller_dashboard.php" class="action-link">Seller Dashboard</a>

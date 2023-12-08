@@ -7,7 +7,7 @@ $_SESSION["visited"] = true;
 
 $searchTerm = isset($_POST['search']) ? $_POST['search'] : '';
 
-$sql = "SELECT * FROM SellerInfo WHERE CONCAT(Location, Age, FloorPlan, Bedrooms, Bathrooms, Garden, Parking, Proximity, PropertyTax, Price) LIKE ?";
+$sql = "SELECT * FROM SellerInfo WHERE CONCAT(Location, YearBuilt, FloorPlan, Bedrooms, Bathrooms, Garden, Parking, Proximity, PropertyTax, Price) LIKE ?";
 $searchTerm = "%$searchTerm%";
 $stmt = mysqli_stmt_init($link);
 if (!mysqli_stmt_prepare($stmt, $sql)) {
@@ -42,7 +42,7 @@ if (!mysqli_stmt_prepare($stmt, $sql)) {
                 <div class='property-card'>
                     <img src='<?php echo $row['ImagePath']; ?>' alt='Property Image'>
                     <p>Location: <?php echo $row['Location']; ?></p>
-                    <p>Price: $<?php echo $row['Price']; ?></p>
+                    <p>Price: $<?php echo number_format($row['Price']); ?></p>
                     <a href='buyer_property_details.php?property_id=<?php echo $row['PropertyID']; ?>'>View Details</a>
                 </div>
                 
@@ -62,7 +62,8 @@ $wishlistResult = mysqli_stmt_get_result($wishlistStmt);
         <div class='property-card'>
         <img src='<?php echo $row['ImagePath']; ?>' alt='Property Image'>
         <p>Location: <?php echo $row['Location']; ?></p>
-        <p>Price: $<?php echo $row['Price']; ?></p>
+        <p>Price: $<?php echo number_format($row['Price']); ?></p>
+
         <a href='buyer_property_details.php?property_id=<?php echo $row['PropertyID']; ?>'>View Details</a>
         </div>
     <?php endwhile; ?>

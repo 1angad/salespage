@@ -39,8 +39,8 @@ if (isset($_GET['property_id'])) {
         <?php if ($property): ?>
             <img src="<?php echo $property['ImagePath']; ?>" alt="Property Image">
             <h2>Location: <?php echo $property['Location']; ?></h2>
-            <p>Price: $<?php echo $property['Price']; ?></p>
-            <p>Age: <?php echo $property['Age']; ?></p>
+            <p>Price: $<?php echo number_format($property['Price']); ?></p>
+            <p>Year Built: <?php echo $property['YearBuilt']; ?></p>
             <p>Floor Plan: <?php echo $property['FloorPlan']; ?></p>
             <p>Bedrooms: <?php echo $property['Bedrooms']; ?></p>
             <p>Bathrooms: <?php echo $property['Bathrooms']; ?></p>

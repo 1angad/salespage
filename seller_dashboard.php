@@ -60,7 +60,7 @@ if (!isset($_SESSION["user"])) {
     <div class="main-content">
         <div class="property-cards">
             <?php
-                $stmt = $link->prepare("SELECT PropertyID, Location, ImagePath FROM SellerInfo WHERE UserID = ?");
+                $stmt = $link->prepare("SELECT PropertyID, Location, ImagePath, Price FROM SellerInfo WHERE UserID = ?");
                 $stmt->bind_param("i", $_SESSION["user"]);
                 $stmt->execute();
 
@@ -70,7 +70,7 @@ if (!isset($_SESSION["user"])) {
                     while ($row = $result->fetch_assoc()) {
                         echo "<div class='property-card'>";
                         echo "<img src='{$row['ImagePath']}' alt='Property Image'>";
-                        echo "<p>Property ID: {$row['PropertyID']}</p>";
+                        echo "<p>Price: $" . number_format($row['Price']) . "</p>";
                         echo "<p>Location: {$row['Location']}</p>";
                         echo "<a href='property_details.php?property_id={$row['PropertyID']}'>View Details</a>";
                         echo "</div>";

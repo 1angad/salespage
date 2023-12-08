@@ -40,9 +40,9 @@ if (isset($_GET['property_id'])) {
             <h1>Property Details</h1>
             <img src="<?php echo htmlspecialchars($property['ImagePath']); ?>" alt="Property Image">
             <p><strong>Location:</strong> <?php echo htmlspecialchars($property['Location']); ?></p>
-            <p><strong>Price:</strong> $<?php echo htmlspecialchars($property['Price']); ?></p>
-            <p><strong>Age:</strong> <?php echo htmlspecialchars($property['Age']); ?> years</p>
-            <p><strong>Floor Plan:</strong> <?php echo htmlspecialchars($property['FloorPlan']); ?></p>
+            <p><strong>Price:</strong> $<?php echo htmlspecialchars(number_format($property['Price'])); ?></p>
+            <p><strong>Year Built:</strong> <?php echo htmlspecialchars($property['YearBuilt']); ?></p>
+            <p><strong>Square Footage:</strong> <?php echo htmlspecialchars($property['FloorPlan']); ?></p>
             <p><strong>Bedrooms:</strong> <?php echo htmlspecialchars($property['Bedrooms']); ?></p>
             <p><strong>Bathrooms:</strong> <?php echo htmlspecialchars($property['Bathrooms']); ?></p>
             <p><strong>Garden:</strong> <?php echo $property['Garden'] ? 'Yes' : 'No'; ?></p>
