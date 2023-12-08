@@ -1,8 +1,13 @@
 body {
-    font-family: 'Arial', sans-serif;
-    background-image: url('atlanta.jpg'); 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: url('atlanta.jpg') no-repeat;
     background-size: cover;
-    background-attachment: fixed;
+    background-position: center;
+    font-family: Inter, sans-serif; /* Updated font-family */
     color: white;
 }
 
@@ -12,6 +17,7 @@ body {
     align-items: center;
     padding: 20px;
     background-color: rgba(0, 0, 0, 0.7);
+    width: 90%;
 }
 
 .logo {
@@ -34,17 +40,34 @@ body {
     font-weight: bold;
 }
 
+.container {
+    width: 90%;
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    color: #fff;
+    border-radius: 10px;
+    padding: 30px 40px;
+}
+
 .hero-section {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 80vh;
     text-align: center;
 }
 
 .hero-text h1 {
     font-size: 3em;
     margin-bottom: 20px;
+}
+
+.service-plans{
+    text-align: left;
+    background-color: rgba(0, 0, 0, 0.6);
+    margin: 10px;
+    padding: 10px;
 }
 
 .cta-button {
@@ -55,13 +78,16 @@ body {
     border-radius: 5px;
 }
 
-.content-section, .services-section, .contact-section {
-    padding: 40px;
+.content-section,
+.services-section,
+.contact-section {
+    padding: 20px;
+    margin: 10px;
     background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent background for content */
 }
 
 footer {
+    width: 100%;
     text-align: center;
-    padding: 20px;
     background-color: #333;
 }
