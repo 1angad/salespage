@@ -8,6 +8,7 @@ if (!isset($_SESSION["user"])) {
 }
 
 if (isset($_POST['submit'])) {
+    // Retrieve form data
     $price = $_POST['price'];
     $location = $_POST['location'];
     $age = $_POST['age'];
@@ -18,7 +19,13 @@ if (isset($_POST['submit'])) {
     $parking = isset($_POST['parking']) ? 1 : 0;
     $proximity = $_POST['proximity'];
     $propertyTax = $_POST['propertyTax'];
-    $imageURL = $_POST['imageURL']; 
+
+    // Handle file upload
+    $image = $_FILES['propertyImage'];
+    $imageName = $image['name'];
+    $imageTmpName = $image['tmp_name'];
+    $imageDestination = 'path/to/images/' . $imageName;
+    move_uploaded_file($imageTmpName, $imageDestination);
 
     $userID = $_SESSION["user"];
     $sql = "INSERT INTO SellerInfo (UserID, Price, Location, Age, FloorPlan, Bedrooms, Bathrooms, Garden, Parking, Proximity, PropertyTax, ImagePath) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -26,7 +33,7 @@ if (isset($_POST['submit'])) {
     if (!mysqli_stmt_prepare($stmt, $sql)) {
         echo "SQL statement failed";
     } else {
-        mysqli_stmt_bind_param($stmt, "isssiiiiidss", $userID, $price, $location, $age, $floorPlan, $bedrooms, $bathrooms, $garden, $parking, $proximity, $propertyTax, $imageURL);
+        mysqli_stmt_bind_param($stmt, "isssiiiiidss", $userID, $price, $location, $age, $floorPlan, $bedrooms, $bathrooms, $garden, $parking, $proximity, $propertyTax, $imageDestination);
         mysqli_stmt_execute($stmt);
         header("Location: seller_dashboard.php");
         exit();
@@ -56,7 +63,8 @@ if (isset($_POST['submit'])) {
             <input type="checkbox" name="parking"> <label for="parking">Parking</label>
             <input type="text" name="proximity" placeholder="Proximity to Facilities">
             <input type="number" name="propertyTax" placeholder="Property Tax">
-            <input type="text" name="imageURL" placeholder="Image URL">
+            <p>Upload Property Image</p>
+            <input type="file" name="propertyImage">
             <input type="submit" name="submit" value="Add Property">
         </form>
     </div>
