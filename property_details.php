@@ -50,10 +50,18 @@ if (isset($_GET['property_id'])) {
             <p><strong>Proximity to Facilities:</strong> <?php echo htmlspecialchars($property['Proximity']); ?></p>
             <p><strong>Property Tax:</strong> $<?php echo htmlspecialchars($property['PropertyTax']); ?></p>
 
-            <form action="delete_property.php" method="POST">
-                <input type="hidden" name="property_id" value="<?php echo $propertyID; ?>">
-                <button type="submit" name="delete">Delete Property</button>
-            </form>
+            <div class="propertyButtons">
+                <form action="edit_property.php" id = "edit" method="GET">
+                    <input type="hidden" name="property_id" value="<?php echo $propertyID; ?>">
+                    <button type="submit" name="edit">Edit Property</button>
+                </form>
+
+                <form action="delete_property.php" id = "delete" method="POST">
+                    <input type="hidden" name="property_id" value="<?php echo $propertyID; ?>">
+                    <button type="submit" name="delete">Delete Property</button>
+                </form>
+            </div>
+            
         <?php else: ?>
             <p>Property not found.</p>
         <?php endif; ?>

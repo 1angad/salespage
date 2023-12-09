@@ -15,7 +15,6 @@ $users = "CREATE TABLE users (
     EmailID varchar(100) DEFAULT NULL,
     Username varchar(50) DEFAULT NULL,
     Password varchar(255) DEFAULT NULL,
-    AccountType enum('free','premium') DEFAULT NULL,
     PRIMARY KEY (UserID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci";
 

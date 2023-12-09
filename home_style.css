@@ -1,14 +1,21 @@
+@font-face{
+    font-family: Inter;
+    src: url(Inter-VariableFont_slnt\,wght.ttf);
+}
+
 body {
+    margin: 0;
+    padding: 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: url('atlanta.jpg') no-repeat;
+    background: url('home.jpg') no-repeat;
     background-size: cover;
     background-position: center;
-    font-family: Inter, sans-serif; /* Updated font-family */
-    color: white;
+    font-family: Inter, sans-serif;
+    color: #e8e8e8;
 }
 
 .header {
@@ -16,17 +23,30 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 20px;
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(61, 61, 61, 0.7);
     width: 100%;
 }
 
-.header img{
-    margin-left: 20px;
+.logo {
+    width: 400;
+    height: 380px;
 }
 
-.logo {
-    width: 200px;
-    height: 100px;
+h2 span {
+    text-decoration: none;
+    color: #e8e8e8;
+}
+
+h2 {
+    text-decoration: none;
+}
+
+h3 {
+    margin-left: 1rem;;
+}
+
+p {
+    margin-left: 2rem;
 }
 
 .nav {
@@ -45,7 +65,7 @@ body {
 }
 
 .container {
-    width: 90%;
+    max-width: 80%;
     background: transparent;
     border: 2px solid rgba(255, 255, 255, 0.2);
     backdrop-filter: blur(20px);
@@ -53,6 +73,7 @@ body {
     color: #fff;
     border-radius: 10px;
     padding: 30px 40px;
+    margin: 2rem 0;
 }
 
 .hero-section {
@@ -82,15 +103,15 @@ body {
     border-radius: 5px;
 }
 
-.content-section,
-.services-section,
-.contact-section {
+.section {
     padding: 20px;
-    margin: 10px;
-    background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent background for content */
+    margin: 20px 0;
+    background-color: rgba(144, 128, 89, 0.6);
+    border-radius: 10px;
 }
 
 footer {
+    height: 50px;
     width: 100%;
     text-align: center;
     background-color: #333;

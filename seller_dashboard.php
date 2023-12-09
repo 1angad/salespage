@@ -79,7 +79,7 @@ if (!isset($_SESSION["user"])) {
             ?>
         </div>
         <div class='add-property-button'>
-            <a href='add_property.php'>Add New Property</a>
+            <a href='add_property.php'>+ Add New Property</a>
         </div>
     </div>
 </body>

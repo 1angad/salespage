@@ -18,7 +18,7 @@ body {
 }
 
 .property-details {
-    background: rgba(0, 0, 0, 0.75); /* Semi-transparent black background */
+    background: rgba(0, 0, 0, 0.75);
     border-radius: 10px;
     padding: 20px;
     margin: 20px;
@@ -51,7 +51,7 @@ form {
 }
 
 button {
-    background-color: #4CAF50;
+    background-color: #e7ca24;
     color: white;
     padding: 10px 20px;
     border: none;
@@ -62,5 +62,51 @@ button {
 }
 
 button:hover {
-    background-color: #367c39;
+    background-color: #c7a21e;
+}
+
+.edit-property {
+    background: rgba(0, 0, 0, 0.75);
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px;
+    width: 80%;
+    max-width: 800px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.edit-property form {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 10px;
+}
+
+.edit-property form label {
+    font-weight: bold;
+}
+
+.edit-property form input[type="text"], .edit-property form input[type="checkbox"] {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.edit-property form button {
+    grid-column: span 2;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.edit-property form button:hover {
+    background-color: #45a049;
+}
+
+.propertyButtons {
+    display: flex;
+    justify-content: space-between;
 }

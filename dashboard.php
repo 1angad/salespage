@@ -18,6 +18,7 @@ $username = $_SESSION["user"];
     <link rel="stylesheet" href="admin-style.css">
 </head>
 <body>
+    <img src="CHS.png" alt="">
     <div class="container">
 
     <?php
@@ -30,10 +31,9 @@ $username = $_SESSION["user"];
         $firstName = $user['FirstName'];
     ?>
 
-    <h1>Welcome, <?php echo htmlspecialchars($firstName); ?>!</h1>
+    <h1>Hello, <?php echo htmlspecialchars($firstName); ?>!</h1>
 
-
-<p>Welcome to the CHS Properties admin dashboard. Here, you can manage your property listings, view properties, and more.</p>
+    <p>Welcome to the CHS Properties user dashboard. Here, you can manage your property listings or view properties.</p>
         
         <div class="dashboard-actions">
             <a href="seller_dashboard.php" class="action-link">Seller Dashboard</a>

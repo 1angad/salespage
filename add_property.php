@@ -18,9 +18,8 @@ if (isset($_POST['submit'])) {
     $garden = isset($_POST['garden']) ? 1 : 0;
     $parking = isset($_POST['parking']) ? 1 : 0;
     $proximity = $_POST['proximity'];
-    $propertyTax = $_POST['propertyTax'];
+    $propertyTax = $price * 0.07;
 
-    // Handle file upload
     $image = $_FILES['propertyImage'];
     $imageName = $image['name'];
     $imageTmpName = $image['tmp_name'];
@@ -62,7 +61,6 @@ if (isset($_POST['submit'])) {
             <input type="checkbox" name="garden"> <label for="garden">Garden</label>
             <input type="checkbox" name="parking"> <label for="parking">Parking</label>
             <input type="text" name="proximity" placeholder="Proximity to Facilities">
-            <input type="number" name="propertyTax" placeholder="Property Tax">
             <p>Upload Property Image</p>
             <input type="file" name="propertyImage">
             <input type="submit" name="submit" value="Add Property">

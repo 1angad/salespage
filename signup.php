@@ -40,11 +40,6 @@
             <input type="password" name="confirm-pass" placeholder="Confirm Password">
         </div>
 
-        <div class="account-type">
-            <label><input type="radio" name="account-type" value="free" checked> Free Account</label>
-            <label><input type="radio" name="account-type" value="premium"> Premium Account</label>
-        </div>
-
         <input type="submit" name="submit" value="Register">
 
         <div class="opposite-link">
@@ -63,7 +58,6 @@ if(isset($_POST["submit"])) {
     $email = $_POST["email"];
     $password = $_POST["password"];
     $confirmPass = $_POST["confirm-pass"];
-    $accountType = $_POST["account-type"];
     $passwordHash = password_hash($password, PASSWORD_DEFAULT);
 
     $errors = array();
@@ -95,12 +89,12 @@ if(isset($_POST["submit"])) {
         mysqli_stmt_close($stmt);
     }
     if (count($errors) == 0) {
-        $sql = "INSERT INTO users (FirstName, LastName, EmailID, Username, Password, AccountType) VALUES (?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO users (FirstName, LastName, EmailID, Username, Password) VALUES (?, ?, ?, ?, ?)";
         $stmt = mysqli_stmt_init($link);
         if (!mysqli_stmt_prepare($stmt, $sql)) {
             die("SQL statement preparation failed: " . mysqli_error($link));
         } else {
-            mysqli_stmt_bind_param($stmt, "ssssss", $firstName, $lastName, $email, $username, $passwordHash, $accountType);
+            mysqli_stmt_bind_param($stmt, "sssss", $firstName, $lastName, $email, $username, $passwordHash);
             mysqli_stmt_execute($stmt);
             mysqli_stmt_close($stmt);
 

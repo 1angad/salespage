@@ -1,20 +1,28 @@
+@font-face{
+    font-family: Inter;
+    src: url(Inter-VariableFont_slnt\,wght.ttf);
+}
+
 body {
     background: url('atlanta.jpg') no-repeat center center fixed;
     background-size: cover;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     color: #333;
+    font-family: Inter, sans-serif;
 }
 
 .property-details {
-    max-width: 800px;
+    width: 70%;
     margin: 20px auto;
     padding: 20px;
     background-color: #f9f9f9;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding-bottom: 40px;
 }
 
 .property-details img {
@@ -27,7 +35,6 @@ body {
     margin-bottom: 10px;
 }
 
-/* Style for wishlist button */
 button[name="add_to_wishlist"] {
     padding: 10px 20px;
     background-color: #007bff;
@@ -39,4 +46,29 @@ button[name="add_to_wishlist"] {
 
 button[name="add_to_wishlist"]:hover {
     background-color: #0056b3;
+}
+
+.main-info {
+    display: flex;
+    justify-content: space-between;
+}
+
+.bbsqft {
+    display: flex;
+    gap: 20px;
+}
+
+.other-info {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 10px;
+}
+
+.other-info p {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background-color: #d1d1d1;
 }

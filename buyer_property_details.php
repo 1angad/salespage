@@ -38,23 +38,46 @@ if (isset($_GET['property_id'])) {
     <div class="property-details">
         <?php if ($property): ?>
             <img src="<?php echo $property['ImagePath']; ?>" alt="Property Image">
-            <h2>Location: <?php echo $property['Location']; ?></h2>
-            <p>Price: $<?php echo number_format($property['Price']); ?></p>
-            <p>Year Built: <?php echo $property['YearBuilt']; ?></p>
-            <p>Floor Plan: <?php echo $property['FloorPlan']; ?></p>
-            <p>Bedrooms: <?php echo $property['Bedrooms']; ?></p>
-            <p>Bathrooms: <?php echo $property['Bathrooms']; ?></p>
-            <p>Garden: <?php echo $property['Garden'] ? 'Yes' : 'No'; ?></p>
-            <p>Parking: <?php echo $property['Parking'] ? 'Yes' : 'No'; ?></p>
-            <p>Proximity: <?php echo $property['Proximity']; ?></p>
-            <p>Property Tax: <?php echo $property['PropertyTax']; ?></p>
-            <form action="add_to_wishlist.php" method="POST">
-                <input type="hidden" name="property_id" value="<?php echo $propertyID; ?>">
-                <button type="submit" name="add_to_wishlist">Add to Wishlist</button>
-            </form>
+            <div class="home-container">
+                <div class="main-info">
+                    <div class="pricing-address">
+                        <h2>Price: $<?php echo number_format($property['Price']); ?></h2>
+                        <p>Location: <?php echo $property['Location']; ?><p>
+                    </div>
+                    <div class="bbsqft">
+                        <div class="bbsqft-info">
+                            <h2><?php echo $property['Bedrooms']; ?></h2>
+                            <p>beds</p>
+                        </div>
+                        <div class="bbsqft-info">
+                            <h2><?php echo $property['Bathrooms']; ?></h2>
+                            <p>baths</p>
+                        </div>
+                        <div class="bbsqft-info">
+                            <h2><?php echo $property['FloorPlan']; ?></h2>
+                            <p>sqft</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="other-info">
+                <p>Year Built: <?php echo $property['YearBuilt']; ?></p>
+                <p>Garden: <?php echo $property['Garden'] ? 'Yes' : 'No'; ?></p>
+                <p>Parking: <?php echo $property['Parking'] ? 'Yes' : 'No'; ?></p>
+                <p>Proximity: <?php echo $property['Proximity']; ?></p>
+                <p>Property Tax: <?php echo $property['PropertyTax']; ?></p>
+            </div>
         <?php else: ?>
             <p>Property not found.</p>
         <?php endif; ?>
+    </div>
+    <div class="wishlist">
+        <form action="add_to_wishlist.php" method="POST">
+            <input type="hidden" name="property_id" value="<?php echo $propertyID; ?>">
+            <button type="submit" name="add_to_wishlist">Add to Wishlist</button>
+        </form>
+        <button><a href="buyer_dashboard.php" id = "add_to_wishlist">Back to Dashboard</a></button>
     </div>
 </body>
 </html>
