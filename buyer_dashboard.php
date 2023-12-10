@@ -7,7 +7,7 @@ $_SESSION["visited"] = true;
 
 $searchTerm = isset($_POST['search']) ? $_POST['search'] : '';
 
-$sql = "SELECT * FROM SellerInfo WHERE CONCAT(Location, YearBuilt, FloorPlan, Bedrooms, Bathrooms, Garden, Parking, Proximity, PropertyTax, Price) LIKE ?";
+$sql = "SELECT * FROM chs_sellerinfo WHERE CONCAT(Location, YearBuilt, FloorPlan, Bedrooms, Bathrooms, Garden, Parking, Proximity, PropertyTax, Price) LIKE ?";
 $searchTerm = "%$searchTerm%";
 $stmt = mysqli_stmt_init($link);
 if (!mysqli_stmt_prepare($stmt, $sql)) {
@@ -49,7 +49,7 @@ if (!mysqli_stmt_prepare($stmt, $sql)) {
                                 </a>
                             </li>
                             <li class="list">
-                                <a href="buyer_dashboard.php" class="nav-link">
+                                <a href="buyer_dashboard.php" class="nav-link" id = "active">
                                     <i class="bx bx-bar-chart-alt-2 icon"></i>
                                     <span class="link">Buyer Dashboard</span>
                                 </a>
@@ -84,19 +84,22 @@ if (!mysqli_stmt_prepare($stmt, $sql)) {
             <?php while ($row = mysqli_fetch_assoc($result)): ?>
                 <div class='property-card'>
                     <img src='<?php echo $row['ImagePath']; ?>' alt='Property Image'>
-                    <p>Location: <?php echo $row['Location']; ?></p>
-                    <p>Price: $<?php echo number_format($row['Price']); ?></p>
+                    <p><strong><?php echo $row['Location']; ?></strong></p>
+                    <p>$<?php echo number_format($row['Price']); ?></p>
                     <a href='buyer_property_details.php?property_id=<?php echo $row['PropertyID']; ?>'>View Details</a>
                 </div>
             <?php endwhile; ?>
             <?php
-                $wishlistSql = "SELECT * FROM SellerInfo INNER JOIN Wishlist ON SellerInfo.PropertyID = Wishlist.PropertyID WHERE Wishlist.UserID = ?";
+                $wishlistSql = "SELECT * FROM chs_sellerinfo INNER JOIN chs_wishlist ON chs_sellerinfo.PropertyID = chs_wishlist.PropertyID WHERE chs_wishlist.UserID = ?";
                 $wishlistStmt = mysqli_prepare($link, $wishlistSql);
                 mysqli_stmt_bind_param($wishlistStmt, "i", $_SESSION["user"]);
                 mysqli_stmt_execute($wishlistStmt);
                 $wishlistResult = mysqli_stmt_get_result($wishlistStmt);
             ?>
     </div>
+
+    <hr>
+
 <div class="wishlist-properties">
     <h3>Your Wishlist</h3>
     <?php while ($row = mysqli_fetch_assoc($wishlistResult)): ?>
@@ -106,8 +109,10 @@ if (!mysqli_stmt_prepare($stmt, $sql)) {
         <p>Price: $<?php echo number_format($row['Price']); ?></p>
 
         <a href='buyer_property_details.php?property_id=<?php echo $row['PropertyID']; ?>'>View Details</a>
-        </div>
+        <a href='remove_from_wishlist.php?property_id=<?php echo $row['PropertyID']; ?>' class = "remove">-</a>        
+    </div>
     <?php endwhile; ?>
+    </div>
 </div>
 </body>
 </html>

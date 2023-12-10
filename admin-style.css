@@ -83,6 +83,12 @@ form textarea {
     color: #333;
 }
 
+.checkboxes div {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
 form input[type="submit"] {
     background-color: #4CAF50;
     color: #fff;

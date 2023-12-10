@@ -26,21 +26,21 @@ if (!isset($_SESSION["user"])) {
                 <div class="sidebar-content">
                     <nav>
                         <ul class="lists">
-                        <li class="list">
+                            <li class="list">
                                 <a href="home.html" class="nav-link">
-                                    <i class="bx bx-bell icon"></i>
+                                    <i class="bx bx-home-alt icon"></i>
                                     <span class="link">Homepage</span>
                                 </a>
                             </li>
                             <li class="list">
-                                <a href="seller_dashboard.php" class="nav-link">
-                                    <i class="bx bx-home-alt icon"></i>
+                                <a href="seller_dashboard.php" class="nav-link" id = "active">
+                                    <i class="bx bx-bar-chart-alt-2 icon"></i>
                                     <span class="link">Seller Dashboard</span>
                                 </a>
                             </li>
                             <li class="list">
                                 <a href="buyer_dashboard.php" class="nav-link">
-                                    <i class="bx bx-bar-chart-alt-2 icon"></i>
+                                    <i class="bx bx-bell icon"></i>
                                     <span class="link">Buyer Dashboard</span>
                                 </a>
                             </li>
@@ -60,7 +60,7 @@ if (!isset($_SESSION["user"])) {
     <div class="main-content">
         <div class="property-cards">
             <?php
-                $stmt = $link->prepare("SELECT PropertyID, Location, ImagePath, Price FROM SellerInfo WHERE UserID = ?");
+                $stmt = $link->prepare("SELECT PropertyID, Location, ImagePath, Price FROM chs_sellerinfo WHERE UserID = ?");
                 $stmt->bind_param("i", $_SESSION["user"]);
                 $stmt->execute();
 
@@ -69,7 +69,8 @@ if (!isset($_SESSION["user"])) {
                 if ($result->num_rows > 0) {
                     while ($row = $result->fetch_assoc()) {
                         echo "<div class='property-card'>";
-                        echo "<img src='{$row['ImagePath']}' alt='Property Image'>";
+                        $imagePath = !empty($row['ImagePath']) ? $row['ImagePath'] : 'house-icon.png';
+                        echo "<img src='{$imagePath}' alt='Property Image'>";                    
                         echo "<p>Price: $" . number_format($row['Price']) . "</p>";
                         echo "<p>Location: {$row['Location']}</p>";
                         echo "<a href='property_details.php?property_id={$row['PropertyID']}'>View Details</a>";
@@ -79,7 +80,7 @@ if (!isset($_SESSION["user"])) {
             ?>
         </div>
         <div class='add-property-button'>
-            <a href='add_property.php'>Add New Property</a>
+            <a href='add_property.php'>+ Add New Property</a>
         </div>
     </div>
 </body>

@@ -19,17 +19,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $parking = isset($_POST['parking']) ? 1 : 0;
     $proximity = $_POST['proximity'];
     $propertyTax = $_POST['property_tax'];
+    $propertyLink = $_POST['property_link'];
 
-    $sql = "UPDATE sellerinfo SET Location = ?, Price = ?, YearBuilt = ?, FloorPlan = ?, Bedrooms = ?, Bathrooms = ?, Garden = ?, Parking = ?, Proximity = ?, PropertyTax = ? WHERE PropertyID = ?";
+    $sql = "UPDATE chs_sellerinfo SET Location = ?, Price = ?, YearBuilt = ?, FloorPlan = ?, Bedrooms = ?, Bathrooms = ?, Garden = ?, Parking = ?, Proximity = ?, PropertyTax = ?, ImagePath = ? WHERE PropertyID = ?";
     $stmt = $link->prepare($sql);
-    $stmt->bind_param("sdisiiiiisi", $location, $price, $yearBuilt, $floorPlan, $bedrooms, $bathrooms, $garden, $parking, $proximity, $propertyTax, $propertyID);
+    $stmt->bind_param("sdisiiiiissi", $location, $price, $yearBuilt, $floorPlan, $bedrooms, $bathrooms, $garden, $parking, $proximity, $propertyTax, $propertyLink, $propertyID);
     $stmt->execute();
 
-    if ($stmt->affected_rows == 1) {
-        header("Location: property_details.php?property_id=$propertyID");
-        exit();
+    if ($stmt->execute()) {
+            header("Location: property_details.php?property_id=$propertyID");
+            exit();
     } else {
         echo "Error updating record: " . $stmt->error;
+        echo "SQL error: " . $link->error;
     }
 
     $stmt->close();

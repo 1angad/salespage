@@ -10,7 +10,7 @@ if (!isset($_SESSION["user"])) {
 if (isset($_GET['property_id'])) {
     $propertyID = $_GET['property_id'];
 
-    $sql = "SELECT * FROM SellerInfo WHERE PropertyID = ?";
+    $sql = "SELECT * FROM chs_sellerinfo WHERE PropertyID = ?";
     $stmt = mysqli_stmt_init($link);
     if (!mysqli_stmt_prepare($stmt, $sql)) {
         echo "SQL Error";
@@ -71,6 +71,9 @@ if (isset($_GET['property_id'])) {
                 <label for="property_tax">Property Tax:</label>
                 <input type="text" id="property_tax" name="property_tax" value="<?php echo htmlspecialchars($property['PropertyTax']); ?>">
 
+                <label for="property_link">Property Image Link:</label>
+                <input type="text" id="property_link" name="property_link" value="<?php echo htmlspecialchars($property['ImagePath']); ?>">
+                
                 <button type="submit" name="update">Update Property</button>
             </form>
         <?php else: ?>

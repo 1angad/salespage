@@ -10,7 +10,7 @@ if (!isset($_SESSION["user"])) {
 if (isset($_GET['property_id'])) {
     $propertyID = $_GET['property_id'];
 
-    $sql = "SELECT * FROM SellerInfo WHERE PropertyID = ?";
+    $sql = "SELECT * FROM chs_sellerinfo WHERE PropertyID = ?";
     $stmt = mysqli_stmt_init($link);
     if (!mysqli_stmt_prepare($stmt, $sql)) {
         echo "SQL Error";
@@ -77,7 +77,7 @@ if (isset($_GET['property_id'])) {
             <input type="hidden" name="property_id" value="<?php echo $propertyID; ?>">
             <button type="submit" name="add_to_wishlist">Add to Wishlist</button>
         </form>
-        <button><a href="buyer_dashboard.php" id = "add_to_wishlist">Back to Dashboard</a></button>
+        <a href="buyer_dashboard.php" id = "add_to_wishlist">Back to Dashboard</a>
     </div>
 </body>
 </html>

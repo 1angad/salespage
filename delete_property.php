@@ -13,7 +13,7 @@ if (isset($_POST['delete']) && isset($_POST['property_id'])) {
     $propertyID = $_POST['property_id'];
 
     // Delete the property from the database
-    $sql = "DELETE FROM SellerInfo WHERE PropertyID = ?";
+    $sql = "DELETE FROM chs_sellerinfo WHERE PropertyID = ?";
     $stmt = mysqli_stmt_init($link);
     if (!mysqli_stmt_prepare($stmt, $sql)) {
         echo "SQL Error";

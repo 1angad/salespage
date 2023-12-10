@@ -12,11 +12,11 @@
             <h1>Sign In</h1>
             <div class="input-box">
                 <input type="email" name="email" placeholder="Email Address">
-                <img src="bxs-envelope.svg">
+                <img src="bxs-envelope.svg" alt = "icon">
             </div>
             <div class="input-box">
                 <input type="password" name="password" placeholder="Password">
-                <img src="bxs-lock-alt.svg">
+                <img src="bxs-lock-alt.svg" alt = "icon">
             </div>
             
             <input type="submit" name="login" value="Log In">
@@ -31,7 +31,7 @@
             $password = $_POST["password"];
             require_once "connectDB.php";
 
-            $sql = "SELECT * FROM users WHERE EmailID = ?";
+            $sql = "SELECT * FROM chs_users WHERE EmailID = ?";
             $stmt = mysqli_stmt_init($link);
 
             if (!mysqli_stmt_prepare($stmt, $sql)) {

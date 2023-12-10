@@ -13,27 +13,27 @@
 
         <div class="input-box">
             <input type="text" name="first-name" placeholder="First Name">
-            <img src="bxs-user.svg"> <!-- Update or remove the icon as needed -->
+            <img src="bxs-user.svg" alt = "icon"> 
         </div>
 
         <div class="input-box">
             <input type="text" name="last-name" placeholder="Last Name">
-            <img src="bxs-user.svg"> <!-- Update or remove the icon as needed -->
+            <img src="bxs-user.svg" alt = "icon">
         </div>
 
         <div class="input-box">
             <input type="text" name="user" placeholder="Username">
-            <img src="bxs-user.svg">
+            <img src="bxs-user.svg" alt = "icon">
         </div>
 
         <div class="input-box">
             <input type="email" name="email" placeholder="Email Address">
-            <img src="bxs-envelope.svg">
+            <img src="bxs-envelope.svg" alt = "icon">
         </div>
 
         <div class="input-box">
             <input type="password" name="password" placeholder="Password">
-            <img src="bxs-lock-alt.svg">
+            <img src="bxs-lock-alt.svg" alt = "icon">
         </div>
 
         <div class="input-box">
@@ -73,8 +73,24 @@ if(isset($_POST["submit"])) {
         array_push($errors, "Passwords must match");
     }
 
+    // Check if username already exists
+    $sql = "SELECT Username FROM chs_users WHERE Username = ?";
+    $stmt = mysqli_stmt_init($link);
+    if (!mysqli_stmt_prepare($stmt, $sql)) {
+        die("SQL statement preparation failed: " . mysqli_error($link));
+    } else {
+        mysqli_stmt_bind_param($stmt, "s", $username);
+        mysqli_stmt_execute($stmt);
+        mysqli_stmt_store_result($stmt);
+
+        if (mysqli_stmt_num_rows($stmt) > 0) {
+            array_push($errors, "Username already taken");
+        }
+        mysqli_stmt_close($stmt);
+    }
+
     // Check if email already exists
-    $sql = "SELECT EmailID FROM users WHERE EmailID = ?";
+    $sql = "SELECT EmailID FROM chs_users WHERE EmailID = ?";
     $stmt = mysqli_stmt_init($link);
     if (!mysqli_stmt_prepare($stmt, $sql)) {
         die("SQL statement preparation failed: " . mysqli_error($link));
@@ -89,7 +105,7 @@ if(isset($_POST["submit"])) {
         mysqli_stmt_close($stmt);
     }
     if (count($errors) == 0) {
-        $sql = "INSERT INTO users (FirstName, LastName, EmailID, Username, Password) VALUES (?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO chs_users (FirstName, LastName, EmailID, Username, Password) VALUES (?, ?, ?, ?, ?)";
         $stmt = mysqli_stmt_init($link);
         if (!mysqli_stmt_prepare($stmt, $sql)) {
             die("SQL statement preparation failed: " . mysqli_error($link));

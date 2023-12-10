@@ -10,7 +10,7 @@ if (!isset($_SESSION["user"])) {
 if (isset($_GET['property_id'])) {
     $propertyID = $_GET['property_id'];
 
-    $sql = "SELECT * FROM SellerInfo WHERE PropertyID = ?";
+    $sql = "SELECT * FROM chs_sellerinfo WHERE PropertyID = ?";
     $stmt = mysqli_stmt_init($link);
     if (!mysqli_stmt_prepare($stmt, $sql)) {
         echo "SQL Error";
@@ -39,17 +39,48 @@ if (isset($_GET['property_id'])) {
         <?php if ($property): ?>
             <h1>Property Details</h1>
             <img src="<?php echo htmlspecialchars($property['ImagePath']); ?>" alt="Property Image">
-            <p><strong>Location:</strong> <?php echo htmlspecialchars($property['Location']); ?></p>
-            <p><strong>Price:</strong> $<?php echo htmlspecialchars(number_format($property['Price'])); ?></p>
-            <p><strong>Year Built:</strong> <?php echo htmlspecialchars($property['YearBuilt']); ?></p>
-            <p><strong>Square Footage:</strong> <?php echo htmlspecialchars($property['FloorPlan']); ?></p>
-            <p><strong>Bedrooms:</strong> <?php echo htmlspecialchars($property['Bedrooms']); ?></p>
-            <p><strong>Bathrooms:</strong> <?php echo htmlspecialchars($property['Bathrooms']); ?></p>
-            <p><strong>Garden:</strong> <?php echo $property['Garden'] ? 'Yes' : 'No'; ?></p>
-            <p><strong>Parking:</strong> <?php echo $property['Parking'] ? 'Yes' : 'No'; ?></p>
-            <p><strong>Proximity to Facilities:</strong> <?php echo htmlspecialchars($property['Proximity']); ?></p>
-            <p><strong>Property Tax:</strong> $<?php echo htmlspecialchars($property['PropertyTax']); ?></p>
-
+            <table>
+                <tr>
+                    <td><strong>Location:</strong></td>
+                    <td><?php echo htmlspecialchars($property['Location']); ?></td>
+                </tr>
+                <tr>
+                    <td><strong>Price:</strong></td>
+                    <td>$<?php echo htmlspecialchars(number_format($property['Price'])); ?></td>
+                </tr>
+                <tr>
+                    <td><strong>Year Built:</strong></td>
+                    <td><?php echo htmlspecialchars($property['YearBuilt']); ?></td>
+                </tr>
+                <tr>
+                    <td><strong>Square Footage:</strong></td>
+                    <td><?php echo htmlspecialchars($property['FloorPlan']); ?></td>
+                </tr>
+                <tr>
+                    <td><strong>Bedrooms:</strong></td>
+                    <td><?php echo htmlspecialchars($property['Bedrooms']); ?></td>
+                </tr>
+                <tr>
+                    <td><strong>Bathrooms:</strong></td>
+                    <td><?php echo htmlspecialchars($property['Bathrooms']); ?></td>
+                </tr>
+                <tr>
+                    <td><strong>Garden:</strong></td>
+                    <td><?php echo $property['Garden'] ? 'Yes' : 'No'; ?></td>
+                </tr>
+                <tr>
+                    <td><strong>Parking:</strong></td>
+                    <td><?php echo $property['Parking'] ? 'Yes' : 'No'; ?></td>
+                </tr>
+                <tr>
+                    <td><strong>Proximity to Facilities:</strong></td>
+                    <td><?php echo htmlspecialchars($property['Proximity']); ?></td>
+                </tr>
+                <tr>
+                    <td><strong>Property Tax:</strong></td>
+                    <td>$<?php echo htmlspecialchars($property['PropertyTax']); ?></td>
+                </tr>
+            </table>
             <div class="propertyButtons">
                 <form action="edit_property.php" id = "edit" method="GET">
                     <input type="hidden" name="property_id" value="<?php echo $propertyID; ?>">
@@ -66,5 +97,6 @@ if (isset($_GET['property_id'])) {
             <p>Property not found.</p>
         <?php endif; ?>
     </div>
+    <button><a href="seller_dashboard.php">Back to Dashboard</a></button>
 </body>
 </html>

@@ -23,7 +23,7 @@ $username = $_SESSION["user"];
 
     <?php
         require_once "connectDB.php";
-        $stmt = $link->prepare("SELECT FirstName FROM users WHERE UserID = ?");
+        $stmt = $link->prepare("SELECT FirstName FROM chs_users WHERE UserID = ?");
         $stmt->bind_param("s", $username);
         $stmt->execute();
         $result = $stmt->get_result();

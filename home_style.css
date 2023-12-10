@@ -19,9 +19,6 @@ body {
 }
 
 .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     padding: 20px;
     background-color: rgba(61, 61, 61, 0.7);
     width: 100%;
@@ -50,6 +47,8 @@ p {
 }
 
 .nav {
+    display: flex;
+    justify-content: space-between;
     list-style-type: none;
 }
 
@@ -59,6 +58,7 @@ p {
 }
 
 .nav a {
+    font-size: 2rem;
     color: white;
     text-decoration: none;
     font-weight: bold;

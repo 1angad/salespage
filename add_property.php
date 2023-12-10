@@ -8,7 +8,6 @@ if (!isset($_SESSION["user"])) {
 }
 
 if (isset($_POST['submit'])) {
-    // Retrieve form data
     $price = $_POST['price'];
     $location = $_POST['location'];
     $age = $_POST['yearbuilt'];
@@ -20,19 +19,15 @@ if (isset($_POST['submit'])) {
     $proximity = $_POST['proximity'];
     $propertyTax = $price * 0.07;
 
-    $image = $_FILES['propertyImage'];
-    $imageName = $image['name'];
-    $imageTmpName = $image['tmp_name'];
-    $imageDestination = 'path/to/images/' . $imageName;
-    move_uploaded_file($imageTmpName, $imageDestination);
+    $propertyLink = $_POST['propertyLink'];
 
     $userID = $_SESSION["user"];
-    $sql = "INSERT INTO SellerInfo (UserID, Price, Location, YearBuilt, FloorPlan, Bedrooms, Bathrooms, Garden, Parking, Proximity, PropertyTax, ImagePath) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO chs_sellerinfo (UserID, Price, Location, YearBuilt, FloorPlan, Bedrooms, Bathrooms, Garden, Parking, Proximity, PropertyTax, ImagePath) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     $stmt = mysqli_stmt_init($link);
     if (!mysqli_stmt_prepare($stmt, $sql)) {
         echo "SQL statement failed";
     } else {
-        mysqli_stmt_bind_param($stmt, "isssiiiiidss", $userID, $price, $location, $age, $floorPlan, $bedrooms, $bathrooms, $garden, $parking, $proximity, $propertyTax, $imageDestination);
+        mysqli_stmt_bind_param($stmt, "isssiiiiidss", $userID, $price, $location, $age, $floorPlan, $bedrooms, $bathrooms, $garden, $parking, $proximity, $propertyTax, $propertyLink);
         mysqli_stmt_execute($stmt);
         header("Location: seller_dashboard.php");
         exit();
@@ -52,20 +47,27 @@ if (isset($_POST['submit'])) {
     <div class="container">
         <h1>Create Property Listing</h1>
         <form action="add_property.php" method="post" enctype="multipart/form-data">
-            <input type="number" name="price" placeholder="Price">
-            <input type="text" name="location" placeholder="Location">
-            <input type="number" name="yearbuilt" placeholder="Year Built">
-            <input type="text" name="floorPlan" placeholder="Square Footage">
-            <input type="number" name="bedrooms" placeholder="Bedrooms">
-            <input type="number" name="bathrooms" placeholder="Bathrooms">
-            <input type="checkbox" name="garden"> <label for="garden">Garden</label>
-            <input type="checkbox" name="parking"> <label for="parking">Parking</label>
+            <input type="number" name="price" placeholder="Price" required>
+            <input type="text" name="location" placeholder="Location" required>
+            <input type="number" name="yearbuilt" placeholder="Year Built" required>
+            <input type="text" name="floorPlan" placeholder="Square Footage" required>
+            <input type="number" name="bedrooms" placeholder="Bedrooms" required>
+            <input type="number" name="bathrooms" placeholder="Bathrooms" required>
+            <div class="checkboxes">
+                <div>
+                    <label for="garden">Garden</label><input type="checkbox" name="garden">
+                </div>
+                <div>
+                    <label for="parking">Parking</label><input type="checkbox" name="parking">
+                </div>
+            </div>
             <input type="text" name="proximity" placeholder="Proximity to Facilities">
-            <p>Upload Property Image</p>
-            <input type="file" name="propertyImage">
+            <p>Link Property Image</p>
+            <input type="text" name="propertyLink">
             <input type="submit" name="submit" value="Add Property">
         </form>
     </div>
+    <a href="seller_dashboard.php">Back</a>
 </body>
 </html>
 

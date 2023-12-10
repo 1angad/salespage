@@ -8,7 +8,7 @@ if (!$link) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
-$users = "CREATE TABLE users (
+$users = "CREATE TABLE chs_users (
     UserID int(11) NOT NULL AUTO_INCREMENT,
     FirstName varchar(50) DEFAULT NULL,
     LastName varchar(50) DEFAULT NULL,
@@ -18,7 +18,7 @@ $users = "CREATE TABLE users (
     PRIMARY KEY (UserID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci";
 
-$sellerinfo = "CREATE TABLE sellerinfo (
+$sellerinfo = "CREATE TABLE chs_sellerinfo (
     PropertyID int(11) NOT NULL AUTO_INCREMENT,
     UserID int(11) DEFAULT NULL,
     Location varchar(255) DEFAULT NULL,
@@ -28,15 +28,15 @@ $sellerinfo = "CREATE TABLE sellerinfo (
     Bathrooms int(11) DEFAULT NULL,
     Garden tinyint(1) DEFAULT NULL,
     Parking tinyint(1) DEFAULT NULL,
-    Proximity text DEFAULT NULL,
+    Proximity varchar(255) DEFAULT NULL,
     PropertyTax decimal(10,2) DEFAULT NULL,
     ImagePath varchar(255) DEFAULT NULL,
     Price int(11) DEFAULT NULL,
     PRIMARY KEY (PropertyID),
-    FOREIGN KEY (UserID) REFERENCES users(UserID)
+    FOREIGN KEY (UserID) REFERENCES chs_users(UserID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci";
 
-$listedproperties = "CREATE TABLE listedproperties (
+$listedproperties = "CREATE TABLE chs_listedproperties (
     ListingID int(11) NOT NULL AUTO_INCREMENT,
     PropertyID int(11) DEFAULT NULL,
     Description text DEFAULT NULL,
@@ -50,24 +50,23 @@ $listedproperties = "CREATE TABLE listedproperties (
     ListingDate date DEFAULT NULL,
     Status enum('available','sold','pending','inactive') DEFAULT 'available',
     PRIMARY KEY (ListingID),
-    FOREIGN KEY (PropertyID) REFERENCES sellerinfo(PropertyID)
+    FOREIGN KEY (PropertyID) REFERENCES chs_sellerinfo(PropertyID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci";
 
-// SQL to create tables
-$buyerinfo = "CREATE TABLE buyerinfo (
+$buyerinfo = "CREATE TABLE chs_buyerinfo (
     BuyerID int(11) NOT NULL AUTO_INCREMENT,
     UserID int(11) DEFAULT NULL,
     PropertyID int(11) DEFAULT NULL,
     PRIMARY KEY (BuyerID),
-    FOREIGN KEY (UserID) REFERENCES users(UserID)
+    FOREIGN KEY (UserID) REFERENCES chs_users(UserID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci";
 
-$wishlist = "CREATE TABLE wishlist (
+$wishlist = "CREATE TABLE chs_wishlist (
     UserID int(11) NOT NULL,
     PropertyID int(11) NOT NULL,
     PRIMARY KEY (UserID, PropertyID),
-    FOREIGN KEY (UserID) REFERENCES users(UserID),
-    FOREIGN KEY (PropertyID) REFERENCES sellerinfo(PropertyID)
+    FOREIGN KEY (UserID) REFERENCES chs_users(UserID),
+    FOREIGN KEY (PropertyID) REFERENCES chs_sellerinfo(PropertyID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci";
 
 // Execute queries
