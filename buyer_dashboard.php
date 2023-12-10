@@ -96,8 +96,7 @@ if (!mysqli_stmt_prepare($stmt, $sql)) {
                 mysqli_stmt_execute($wishlistStmt);
                 $wishlistResult = mysqli_stmt_get_result($wishlistStmt);
             ?>
-</div>
-
+    </div>
 <div class="wishlist-properties">
     <h3>Your Wishlist</h3>
     <?php while ($row = mysqli_fetch_assoc($wishlistResult)): ?>
@@ -110,6 +109,5 @@ if (!mysqli_stmt_prepare($stmt, $sql)) {
         </div>
     <?php endwhile; ?>
 </div>
-        </div>
 </body>
 </html>
