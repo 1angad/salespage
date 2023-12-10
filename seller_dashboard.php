@@ -26,6 +26,12 @@ if (!isset($_SESSION["user"])) {
                 <div class="sidebar-content">
                     <nav>
                         <ul class="lists">
+                        <li class="list">
+                                <a href="home.html" class="nav-link">
+                                    <i class="bx bx-bell icon"></i>
+                                    <span class="link">Homepage</span>
+                                </a>
+                            </li>
                             <li class="list">
                                 <a href="seller_dashboard.php" class="nav-link">
                                     <i class="bx bx-home-alt icon"></i>
@@ -36,12 +42,6 @@ if (!isset($_SESSION["user"])) {
                                 <a href="buyer_dashboard.php" class="nav-link">
                                     <i class="bx bx-bar-chart-alt-2 icon"></i>
                                     <span class="link">Buyer Dashboard</span>
-                                </a>
-                            </li>
-                            <li class="list">
-                                <a href="admin_dashboard.php" class="nav-link">
-                                    <i class="bx bx-bell icon"></i>
-                                    <span class="link">Admin Dashboard</span>
                                 </a>
                             </li>
                             <li class="list">
@@ -79,7 +79,7 @@ if (!isset($_SESSION["user"])) {
             ?>
         </div>
         <div class='add-property-button'>
-            <a href='add_property.php'>+ Add New Property</a>
+            <a href='add_property.php'>Add New Property</a>
         </div>
     </div>
 </body>
